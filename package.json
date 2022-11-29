@@ -1,0 +1,22 @@
+{
+  "name": "apibootc",
+  "version": "1.0.0",
+  "description": "api course boot camp",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "prod": "NODE_ENV=production nodemon server.js"
+  },
+  "author": "geleia",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2",
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

@@ -1,0 +1,89 @@
+const checkId = (req, res, next, id) => {
+    console.log(`Beer id is ${id}`);
+    if(req.params.id * 1 > beers.length){
+        return res.status(404).json({
+            status: "Fail",
+            message: "Invalid ID"
+        });
+    };
+    next();
+}
+
+
+const checkBody = (req, res, next) => {
+    console.log(`Beer body is ${req.body}`);
+    if(!req.body.name || req.body.tipo || req.body.preco){
+        return res.status(404).json({
+            status: "Fail",
+            message: "Invalid parameter" 
+        });
+    }
+    next();
+}
+
+const beers = JSON.parse(
+    fs.readFileSync(`${__dirname}/../data/beer.json`)
+);
+
+console.log(req.reqTime);
+    const newId = beers[beers.length - 1].id + 1;
+    const newBeer = Object.assign({ id: newId, ...req.body });
+    //beers = [...beers, newBeer];
+    beers.push(newBeer);
+    console.log(newBeer);
+    fs.writeFile(
+        `${__dirname}/data/beer.json`,
+        JSON.stringify(beers),
+        err => {
+        }
+        );
+    };
+
+    // 1 - filtering
+        const queryObj = { ...req.query };
+        const excluded = ['page', 'sort','limit'];
+        excluded.forEach(el => delete queryObj[el]);
+        
+        console.log(req.query, queryObj);
+    // 2 - advanced filtering
+        let queryStr = JSON.stringify(queryObj);
+        queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+
+        console.log(JSON.parse(queryStr));
+        
+        let query = Beer.find(JSON.parse(queryStr));
+
+    // 3 - sorting
+        if(req.query.sort) {
+            const sortBy = req.query.sort.split(',').join(' ');
+            query = query.sort(sortBy);
+            console.log(sortBy);
+        } else {
+            query = query.sort('createdAt');
+        }    
+
+    // 4 - field limiting
+        if(req.query.fields){
+            const fields = req.query.fields.split(',').join(' ');
+            query = query.select(fields);
+        } else {
+            query = query.select('-__v');
+        }
+
+
+    // 5 - pagination
+        const page = req.query.page * 1 || 1;
+        const limit = req.query.limit * 1 || 100;
+        const skip = (page - 1) * limit; 
+
+        query = query.skip(skip).limit(limit);
+
+        if (req.query.page) {
+            const numBeers = await Beer.countDocuments();
+            if (skip > numBeers) throw new Error('this beer not exists');
+        }
+
+        const userRouter = require('./routes/userRoutes');
+        app.use('/api/v1/user', userRouter);    
+        userControll.js
+        userRoutes.js
