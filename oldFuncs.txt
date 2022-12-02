@@ -39,6 +39,9 @@ console.log(req.reqTime);
         );
     };
 
+    /const id = req.params.id * 1; // * 1 converte str p/ num
+    // const beer = beers.find(el => el.id === id);
+
     // 1 - filtering
         const queryObj = { ...req.query };
         const excluded = ['page', 'sort','limit'];

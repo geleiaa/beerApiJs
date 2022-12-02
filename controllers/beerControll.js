@@ -1,5 +1,7 @@
 const Beer = require('./../models/beerModel');
 const ApiFeatures = require('./../utils/apiFeatures');
+const catchAsync = require('./../utils/catchAsync');
+const AppError = require('./../utils/appError');
 
 // query filter middleware
 const aliasBeers = (req, res, next) => {
@@ -10,9 +12,8 @@ const aliasBeers = (req, res, next) => {
 };
 
 // beer handlers
-const getAllBeers = async (req, res) =>{
+const getAllBeers = catchAsync(async (req, res) =>{
     //console.log(req.reqTime);
-    try {
         // cria new Obj ApiFeatures com mongoose query e route query
         // depois chama os metodos do Obj formando a query
         // no fim execute query com await
@@ -33,103 +34,77 @@ const getAllBeers = async (req, res) =>{
                     beers
                 }
             });
-    } catch(err){
-        res.status(404).json({
-            status: 'Fail :(',
-            message: err
-        });
-        console.log(err);
-    }
-};
+});
 
-const getOneBeer = async (req, res) =>{
+const getOneBeer = catchAsync(async (req, res) =>{
     //console.log(req.reqTime);
-    //const id = req.params.id * 1; // * 1 converte str p/ num
-    // const beer = beers.find(el => el.id === id);
-    try{
-        const beer = await Beer.findById(req.params.id);
-        //Beer.findOne({ _id: req.params.id })
-        res.status(200).json({
-            status: "success",
-            data: {
-                beers: beer
-            }
-        });
-    } catch(err){
-        res.status(404).json({
-            status: 'Fail :(',
-            message: err
-        });
-    }
-};
+    const beer = await Beer.findById(req.params.id);
+    //Beer.findOne({ _id: req.params.id })
 
-const createBeer = async (req, res) =>{
+    if (!beer) {
+        return next(new AppError('No found beer with that ID', 404));
+    }          // next() manda para o global err handling
 
-    // const newBeer = new Beer({})
-    // newBeer.save()
-    try{
-        const newBeer = await Beer.create(req.body);
-    
-        res.status(201).json({
-            status: "success",
-            data: {
-                beers: newBeer
-            }
-        });
+    res.status(200).json({
+        status: "success",
+        data: {
+            beers: beer
+        }
+    });
+});
 
-    } catch(err) {
-        res.status(400).json({
-            status: 'Fail :(',
-            message: err
-        });
-    }   
+const createBeer = catchAsync (async (req, res) =>{
 
-};    
+    const newBeer = await Beer.create(req.body);
+
+    res.status(201).json({
+        status: "success",
+        data: {
+            beers: newBeer
+        }
+    });   
+});    
      
-const updateBeer = async (req, res) =>{
+const updateBeer = catchAsync(async (req, res) =>{
     //console.log(req.reqTime);
-    try{
-        const beer = await Beer.findByIdAndUpdate(
-            req.params.id, 
-            req.body, 
-            { 
-                new: true,
-                runValidators: true 
-            }
-        );
-        
-        res.status(200).json({
-            status: "success",
-            data: {
-                beer
-            }
-        });
-    } catch(err){
-        res.status(400).json({
-            status: 'Fail :(',
-            message: err
-        });
-    }
-};
-
-const deleteBeer = async (req, res) =>{
     
-    try{
-        await Beer.findByIdAndRemove(req.params.id);
+    const beer = await Beer.findByIdAndUpdate(
+        req.params.id, 
+        req.body, 
+        { 
+            new: true,
+            runValidators: true 
+        }
+    );
 
-        res.status(204).json({
-            message: "Beer deleted"
-        });
-    } catch(err){
-        res.status(400).json({
-            status: 'Fail :(',
-            message: err
-        });
+    if (!beer) {
+        return next(new AppError('No found beer with that ID', 404));
     }
-};
+        
+    res.status(200).json({
+        status: "success",
+        data: {
+            beer
+        }
+    });
+});
 
-const beerStats = async (req, res) =>{
-    try {
+const deleteBeer = catchAsync(async (req, res) =>{
+    
+    const beer = await Beer.findByIdAndRemove(req.params.id);
+
+    if (!beer) {
+        return next(new AppError('No found beer with that ID', 404));
+    }
+
+    res.status(204).json({
+        status: "success",
+        message: "Beer deleted",
+        data: beer
+    });
+});
+
+const beerStats = catchAsync(async (req, res) =>{
         const stats = await Beer.aggregate([
             {
                 $match: { ratingAverage: { $gte: 5 }}
@@ -155,14 +130,7 @@ const beerStats = async (req, res) =>{
                 stats
             }
         });
-
-    } catch(err){
-        res.status(400).json({
-            status: 'Fail :(',
-            message: err
-        }); 
-    }
-}
+});
 
 //Business Problem Function ...
 // const businessPlan = async (req, res) =>{
