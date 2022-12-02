@@ -3,7 +3,14 @@ const mongoose = require('mongoose');
 dotenv.config({ path: './config.env'});
 const app = require('./app');
 
-//console.log(process.env);
+// Tratamento p/ erros de funcs sincronos ...
+process.on('uncaughtException', err => {
+    console.log('Erro sincrono kkkk, saindo ...');
+    console.log(err.name, err.message);
+    
+    process.exit(1);
+}); // talvez esta no lugar errado
+
 
 //connect local db with mongoose
 mongoose
@@ -23,6 +30,16 @@ mongoose
 // server         
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server up, port ${port}`);
+});
+
+// Promisses não tratadas passam por aqui (unhandled rejections)
+process.on('unhandledRejection', err => {
+    console.log(err); //err.name, err.message
+    console.log('Promisses não tratadas, saindo ...');
+
+    server.close(() => { // fecha o server 
+        process.exit(1);
+    });
 });
