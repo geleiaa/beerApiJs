@@ -1,6 +1,6 @@
 const AppError = require('./../utils/appError');
 
-const handleCastErrDB = err => { // nao esta passando!!!!!!!!!!! 
+const handleCastErrDB = err => { 
     const message = `Invalid ${err.path}: ${err.value}.`;
     return new AppError(message, 400);
 };
@@ -18,6 +18,10 @@ const handleInvalidField = err => {
     const message = `Invalid input data: ${errors.join(', ')}`;
     return new AppError(message, 400);
 };
+
+const handleJwtErro = err => new AppError('Não autorizado!! ...', 401);
+
+const handleJwtExpiredTk = err => new AppError('Tempo expirado, relogue!!', 401);
 
 const sendErrDev = (err, res) => {
     res.status(err.statusCode).json({
@@ -59,6 +63,9 @@ module.exports = (err, req, res, next) => {
         if(error.code === 11000) error = handleDuplField(error);
         if(error.name === 'ValidationError') error = handleInvalidField(error);
 
+        // JWT
+        if(error.name === 'JsonWebTokenError') error = handleJwtErro(error);
+        if(error.name === 'TokenExpiredError') error = handleJwtExpiredTk(error);
 
         sendErrProd(error, res);
         // err = CastError --> handleCastErrDB --> sendErrProd ...

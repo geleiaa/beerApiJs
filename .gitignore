@@ -1,6 +1,12 @@
 config.env
-data/user.json
-controllers/userControll.js
-routes/userRoutes.js
+oldFuncs.txt
 node_modules/
 package-lock.json
+data/*
+controllers/authControll.js
+controllers/userControll.js
+models/userModel.js
+routes/userRoutes.js
+secBestPratices.txt
+utils/sendEmail.js
+

@@ -85,32 +85,6 @@ beerSchema.post('save', function(doc, next){
     next();
 })
 //Document Mid
-
-//Query Mid
-beerSchema.pre(/^find/, function(next) {
-    this.find({ secretBeer: { $ne: true } });
-    this.start = Date.now();
-    next()
-});
-
-beerSchema.post(/^find/, function(doc, next) { 
-    console.log(`A query demorou ${Date.now() - this.start} miliseconds`);
-    //console.log(doc);
-    next();
-});
-//Query Mid
-
-beerSchema.pre('aggregate', function(next){
-    this.pipeline().unshift({ $match: { secretBeer: { $ne: true} } });
-    //console.log(this.pipeline());
-    next();
-})
-
-//Virtuals
-beerSchema.virtual('fullCaract').get(function() {
-  return this.name + ', ' + this.size + 'ml' + ', ' + this.price
-});
-//Virtuals
 */
 
 const Beer = mongoose.model('Beer', beerSchema); // 1° letra upercase p/ models
