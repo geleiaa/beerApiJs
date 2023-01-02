@@ -1,8 +1,7 @@
 const express = require('express');
 
 const beerController = require('./../controllers/beerControll')
-const authController = require('./../controllers/authControll');
-
+//const authController = require('./../controllers/authControll');
 const router = express.Router();
 
 //router.param('id', beerController.checkId);
@@ -30,6 +29,6 @@ router
     .route('/:id')
     .get(beerController.getOneBeer)
     .patch(beerController.updateBeer)
-    .delete(authController.protectRoutes, authController.rolesForUsers('admin'), beerController.deleteBeer);
-
+    .delete(beerController.deleteBeer);
+    //
 module.exports = router;    

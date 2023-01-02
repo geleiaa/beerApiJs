@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const slugify = require('slugify');
+//const slugify = require('slugify');
 
 //mongoose schema
 const beerSchema = new mongoose.Schema({

@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+    beerr:
+      restart: on-failure
+      build: ./
+      expose: [1234]
+      network_mode: "host"
+    mongu:
+      restart: on-failure
+      image: mongo:4.4-focal  
+      ports: 
+       - "27017:27017"
+      depends_on:
+       - beerr  

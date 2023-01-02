@@ -132,59 +132,6 @@ const beerStats = catchAsync(async (req, res) =>{
         });
 });
 
-//Business Problem Function ...
-// const businessPlan = async (req, res) =>{
-//     try{
-//         const year = req.params.year * 1;
-//         const plan = await Beer.aggregate([
-//             {
-//                 $unwind: '$startDates'
-//             },
-//             {
-//                 $match: {
-//                     startDates: {
-//                       $gte: new Date(`${year}-01-01`),
-//                       $lte: new Date(`${year}-12-31`)
-//                     }
-//                 }    
-//             },
-//             {
-//                 $group: {
-//                     _id: { $month: '$startDates' },
-//                     numStart: { $sum: 1 },
-//                     field: { $push: '$name' }
-//                 }
-//             },
-//             {
-//                 $addFields: { month: '$_id'}
-//             },
-//             {
-//                 $project: {
-//                     _id: 0
-//                 }
-//             },
-//             {
-//                 $sort: { algumaDate: -1}
-//             }
-//         ]);
-
-//         res.status(200).json({
-//             status: "success",
-//             //time: req.reqTime,
-//             data: {
-//                 data
-//             }
-//         })  
-
-//     } catch(err){
-//         res.status(400).json({
-//             status: 'Fail :(',
-//             message: err
-//         }); 
-//     }
-// }
-//Business Problem Function ...
-
 
 module.exports = {
     getAllBeers,

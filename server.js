@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 dotenv.config({ path: './config.env'});
 const app = require('./app');
 
+mongoose.set('strictQuery', true);
+
 // Tratamento p/ erros de funcs sincronos ...
 process.on('uncaughtException', err => {
     console.log('Erro sincrono kkkk, saindo ...');
