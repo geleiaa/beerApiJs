@@ -1,0 +1,13 @@
+.gitignore
+.prettierrc
+.eslintrc.json
+.dockerignore
+.git
+docker-compose.yml
+Dockerfile
+oldFuncs.txt
+secBestPratices.txt
+README.md
+config.env
+package-lock.json
+node_modules
