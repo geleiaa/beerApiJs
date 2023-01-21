@@ -5,6 +5,10 @@
 
 A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual ao apresentado, por isso a estrutura da aplicação feita por mim segue a mesma da aplicação do curso
 
+##### Api Docs com Swagger
+* building ...
+
+
 
 ##### Adicionei docker nesse projeto para facilitar na hora de subir e testar a aplicação e também pra praticar as skills docker. Usei Dockerfile para "buildar" uma imagem com todo o código da api e o docker-compose.yml usa a imagem da api junto com uma imagem do mongodb para subir a "infra" necessaria. 
 

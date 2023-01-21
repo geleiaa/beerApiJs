@@ -1,9 +1,9 @@
 config.env
-oldFuncs.txt
 node_modules/
 package-lock.json
 data/*
 secBestPratices.txt
 .eslintrc.json
 .prettierrc
+oldFuncs.txt
 
