@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 //mongoose schema
 const beerSchema = new mongoose.Schema({
     image: {
-        type: String,
-        required: [true, 'A beer precisa de uma image']
+        type: String
+        //required: [true, 'A beer precisa de uma image']
     },
     name: {
         type: String,
@@ -51,15 +51,15 @@ const beerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    discountPrice: {
-        type: Number,
-        validate: { // Essa validation só funciona quando criar um new obj (ñ com update)
-            validator: function(val) {
-                return val < this.price
-            },
-            message: 'O desconto é maior que o preço'
-        }
-    },
+    // discountPrice: {
+    //     type: Number,
+    //     validate: { // Essa validation só funciona quando criar um new obj (ñ com update)
+    //         validator: function(val) {
+    //             return val < this.price
+    //         },
+    //         message: 'O desconto é maior que o preço'
+    //     }
+    // },
     // slug: String,
     // secretBeer: {
     //     type: Boolean,

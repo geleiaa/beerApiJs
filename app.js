@@ -6,7 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerDocument = require('./swagger.json');
 
 const beerRouter = require('./routes/beerRoutes');
 const globErrHandler = require('./controllers/errorControll');
@@ -59,20 +59,7 @@ app.use((req, res, next) => {
 })
 
 // swagger docs
-const options = {
-    swaggerDefinition: {
-        openapi: '3.0.0',
-        info: {
-            title: "Beer API",
-            version: "3.0",
-            description: "Api para registrar cervejas",
-        },
-    },
-    apis: ['./routes/beerRoutes.js'],
-};
-const swaggerDefs = swaggerJsdoc(options);
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDefs));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // swagger docs
 
 app.use('/api/v1/beer', beerRouter);

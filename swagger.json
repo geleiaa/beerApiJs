@@ -1,0 +1,172 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Beer API",
+        "version": "3.0",
+        "description": "Api de registrar cervejas"
+    },
+    "tags": ["Beers"],
+    "paths": {
+        "/api/v1/beer": {
+            "get": {
+                "description": "retorna todas as beers e também filtrar resultados",
+                "parameters": {
+                    "name": "filter",
+                    "in": "query"
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "post": {
+                "description": "cadastrar beer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "tipo": {
+                                        "type": "string"
+                                    },
+                                    "quantidade": {
+                                        "type": "number"
+                                    },
+                                    "preço": {
+                                        "type": "number"
+                                    },
+                                    "nota": {
+                                        "type": "number"
+                                    },
+                                    "review": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "constent": "Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/beer/{beerID}": {
+            "get": {
+                "description": "filtrar beer pelo ID",
+                "parameters": {
+                    "name": "beerId",
+                    "description": "filtrar pelo ID"
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "patch": {
+                "description": "Atualizar fields pelo ID da beer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "field": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            },
+            "delete":  {
+                "description": "Remover beer pelo ID",
+                "parameters": {
+                    "name": "beerId"
+                },
+                "responses": {
+                    "204": {
+                        "content": {
+                            "application/json": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1/beer/beer-stats": {
+            "get": {
+                "description": "Retorna as beers com maior nota"
+            },
+            "responses": {
+                "200": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "404": {
+                    "description": "Not Found"
+                }
+            }
+        }
+    }
+}
