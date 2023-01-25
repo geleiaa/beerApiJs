@@ -6,11 +6,12 @@
 A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual ao apresentado, por isso a estrutura da aplicação feita por mim segue a mesma da aplicação do curso
 
 ##### Api Docs com Swagger
-* building ...
 
+![apidocs](https://github.com/geleiaa/beerApiJs/blob/main/prints/apidoc.png)
 
+##### GET com filtros [/api/v1/beer/]
 
-##### Adicionei docker nesse projeto para facilitar na hora de subir e testar a aplicação e também pra praticar as skills docker. Usei Dockerfile para "buildar" uma imagem com todo o código da api e o docker-compose.yml usa a imagem da api junto com uma imagem do mongodb para subir a "infra" necessaria. 
+##### Adicionei docker para facilitar na hora de subir e testar a aplicação e também pra praticar as skills docker. O ***Dockerfile*** "builda" uma imagem com todo o código da api e o ***docker-compose.yml*** usa a imagem da api junto com uma imagem do MongoDB para subir os containers necessarios.
 
 * Para "buildar" a imagem e subir os containers ``` docker-compose up -d ```
 

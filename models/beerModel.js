@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 
 //mongoose schema
 const beerSchema = new mongoose.Schema({
-    image: {
-        type: String
-        //required: [true, 'A beer precisa de uma image']
-    },
+    // image: {
+    //     type: String
+    //     //required: [true, 'A beer precisa de uma image']
+    // },
     name: {
         type: String,
         required: [true, 'A beer precisa de nome'],
@@ -14,28 +14,28 @@ const beerSchema = new mongoose.Schema({
         maxlength: [20, 'O nome da beer pode ter no maximo 20 caracteres'], 
         minlength: [3, 'O nome da beer deve ter no minimo 5 caracteres']
     },
-    type: {
+    tipo: {
         type: String,
         required: [true, 'A beer precisa de tipo']
     },
-    size: {
+    mililitros: {
         type: Number,
         default: 300,
         required: [true, 'A Beer precisa do size (ml)']
     },
-    price: {
+    preco: {
         type: Number,
         require: true,
         default: 1.99
     },
-    ratingAverage: {
+    nota: {
         type: Number,
         require: true,
         default: 1.0,
         max: [10, 'A avaliação maxima é 10'],
         min: [1, 'A avaliação minima é 1']
     },
-    ratingQuantity: {
+    quantidadeDeNotas: {
         type: Number,
         require: true,
         default: 0

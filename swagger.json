@@ -5,22 +5,45 @@
         "version": "3.0",
         "description": "Api de registrar cervejas"
     },
-    "tags": ["Beers"],
+    "tags": [
+        {
+            "name": "Beers",
+            "description": "Cadastre sua cervejas favoritas"
+        }
+    ],
     "paths": {
         "/api/v1/beer": {
             "get": {
-                "description": "retorna todas as beers e também filtrar resultados",
-                "parameters": {
-                    "name": "filter",
-                    "in": "query"
-                },
+                "tags": [
+                    "beer"
+                ],
+                "description": "retorna todas as beers e também  pode filtrar resultados",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "?filter=field-name"
+                    },
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "?paginate=number"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "?sort=field-name"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "array",
-                                    "items": {}
+                                    "items": {
+                                        "$ref": "#/components/schema/Beer"
+                                    }
                                 }
                             }
                         }
@@ -31,7 +54,10 @@
                 }
             },
             "post": {
-                "description": "cadastrar beer",
+                "tags": [
+                    "beer"
+                ],
+                "description": "cadastrar beers",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -44,10 +70,10 @@
                                     "tipo": {
                                         "type": "string"
                                     },
-                                    "quantidade": {
+                                    "mililitros": {
                                         "type": "number"
                                     },
-                                    "preço": {
+                                    "preco": {
                                         "type": "number"
                                     },
                                     "nota": {
@@ -67,29 +93,37 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-
+                                    "$ref": "#/components/schema/Beer"
                                 }
                             }
                         }
                     },
                     "400": {
-                        "constent": "Error"
+                        "content": "Error"
                     }
                 }
             }
         },
         "/api/v1/beer/{beerID}": {
             "get": {
-                "description": "filtrar beer pelo ID",
-                "parameters": {
-                    "name": "beerId",
-                    "description": "filtrar pelo ID"
-                },
+                "tags": [
+                    "beer"
+                ],
+                "description": "retorna beer pelo ID",
+                "parameters": [
+                    {
+                        "name": "beerId",
+                        "in": "query",
+                        "description": "filtrar pelo ID"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
                             "application/json": {
-                                "type": "object"
+                                "schema": {
+                                    "$ref": "#/components/schema/Beer"
+                                }
                             }
                         }
                     },
@@ -99,6 +133,9 @@
                 }
             },
             "patch": {
+                "tags": [
+                    "beer"
+                ],
                 "description": "Atualizar fields pelo ID da beer",
                 "requestBody": {
                     "content": {
@@ -119,18 +156,27 @@
                 },
                 "responses": {
                     "200": {
+                        "description": "Beer atualizada",
                         "content": {
                             "application/json": {
-                                "type": "object"
+                                "schema": {
+                                    "$ref": "#/components/schema/Beer"
+                                }
                             }
                         }
                     },
                     "404": {
                         "description": "Not Found"
+                    },
+                    "400": {
+                        "description": "Erro"
                     }
                 }
             },
-            "delete":  {
+            "delete": {
+                "tags": [
+                    "beer"
+                ],
                 "description": "Remover beer pelo ID",
                 "parameters": {
                     "name": "beerId"
@@ -151,7 +197,10 @@
         },
         "/api/v1/beer/beer-stats": {
             "get": {
-                "description": "Retorna as beers com maior nota"
+                "tags": [
+                    "beer"
+                ],
+                "description": "Retorna as beers com maior avaliação"
             },
             "responses": {
                 "200": {
@@ -165,6 +214,51 @@
                 },
                 "404": {
                     "description": "Not Found"
+                }
+            }
+        }
+    },
+    "components": {
+        "schema": {
+            "Beer": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "object",
+                        "example": "ObjectId('507f1f77bcf86cd799439011')"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Nome"
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "example": "Tipo"
+                    },
+                    "mililitros": {
+                        "type": "integer",
+                        "example": "300"
+                    },
+                    "preco": {
+                        "type": "float",
+                        "example": "2.99"
+                    },
+                    "nota": {
+                        "type": "integer",
+                        "example": "10"
+                    },
+                    "quantidadeDeNota": {
+                        "type": "integer",
+                        "example": "2"
+                    },
+                    "review": {
+                        "type": "string",
+                        "example": "essa cerveja é 3B, bom, bonito e barato"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
                 }
             }
         }
