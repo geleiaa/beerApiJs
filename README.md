@@ -10,6 +10,8 @@ A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual a
 > se quiser ver o documentação com mais detalhes, importe o arquivo swagger.json para a ferramenta online do Swagger https://editor.swagger.io/
 
 ![apidocs](https://github.com/geleiaa/beerApiJs/blob/main/prints/apidoc.png)
+> _____________________________________________________________________________________
+
 
 ### GET com Filtros:  
 * ##### filtro com um campo(field) do document, pode ser "nome", "tipo", "preço", etc. Também pode ser usado dois campos na mesma query dividindo os campos com um "&", dessa forma "?nome=nome&tipo=tipo"
@@ -19,6 +21,8 @@ A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual a
 > /api/v1/beer?page=2&limit=10
 
 (os filtros foram implementados no arquivo /utils/apiFeautres.js)
+> _____________________________________________________________________________________
+
 
 > ### Docker: 
 ##### Adicionei docker para facilitar na hora de subir e testar a aplicação e também pra praticar as skills docker. O ***Dockerfile*** "builda" uma imagem com todo o código da api e o ***docker-compose.yml*** usa a imagem da api junto com uma imagem do MongoDB para subir os containers necessarios.
@@ -28,6 +32,8 @@ A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual a
 * Se quiser ver os logs dos containers depois de up ``` docker-compose logs ```
 
 * Depois de usar é só matar os containers com ``` docker-compose down ```
+> _____________________________________________________________________________________
+
 
 > WORKFLOW:        
 
