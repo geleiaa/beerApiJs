@@ -29,8 +29,8 @@ A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual a
 
 * Depois de usar é só matar os containers com ``` docker-compose down ```
 
-* WORKFLOW        
+> WORKFLOW        
 **REQUEST --> app.js --> Routes --> Controllers --> RESPONSE ...**
 
-* ERROR WORKFLOW
+> ERROR WORKFLOW
 **REQUEST --> App.JS --> errorControll.js --> RESPONSE ...**
