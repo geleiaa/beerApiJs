@@ -5,11 +5,6 @@
 
 A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual ao apresentado, por isso a estrutura da aplicação feita por mim segue a mesma da aplicação do curso
 
-##### WORKFLOW        
-**REQUEST --> app.js --> Routes --> Controllers --> RESPONSE ...**
-
-##### ERROR WORKFLOW
-**REQUEST --> App.JS --> errorControll.js --> RESPONSE ...**
 
 > ### Api Docs com Swagger
 > se quiser ver o documentação com mais detalhes, importe o arquivo swagger.json para a ferramenta online do Swagger https://editor.swagger.io/
@@ -33,3 +28,9 @@ A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual a
 * Se quiser ver os logs dos containers depois de up ``` docker-compose logs ```
 
 * Depois de usar é só matar os containers com ``` docker-compose down ```
+
+* WORKFLOW        
+**REQUEST --> app.js --> Routes --> Controllers --> RESPONSE ...**
+
+* ERROR WORKFLOW
+**REQUEST --> App.JS --> errorControll.js --> RESPONSE ...**
