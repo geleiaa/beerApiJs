@@ -7,7 +7,7 @@ const beerSchema = new mongoose.Schema({
     //     type: String
     //     //required: [true, 'A beer precisa de uma image']
     // },
-    name: {
+    nome: {
         type: String,
         required: [true, 'A beer precisa de nome'],
         unique: true,
