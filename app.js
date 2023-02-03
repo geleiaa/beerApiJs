@@ -75,10 +75,4 @@ app.all('*', (req, res, next) => {
 app.use(globErrHandler); // errorControll 
 
 
-//WORKFLOW        
-//REQUEST --> APP.JS --> ROUTERS --> CONTROLLERS --> RESPONSE ...
-
-//ERROR WORKFLOW
-//REQUEST --> APP.JS --> errorControll.js --> RESPONSE ...
-
 module.exports = app;
