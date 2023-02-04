@@ -7,7 +7,7 @@ A idéia era seguir as aulas do curso e não fazer um projeto totalmente igual a
 
 
 > ### Api Docs com Swagger
-> se quiser ver o documentação com mais detalhes, importe o arquivo swagger.json para a ferramenta online do Swagger https://editor.swagger.io/
+> se quiser ver a documentação com mais detalhes, importe o arquivo swagger.json para a ferramenta online do Swagger https://editor.swagger.io/
 
 ![apidocs](https://github.com/geleiaa/beerApiJs/blob/main/prints/apidoc.png)
 > _____________________________________________________________________________________
